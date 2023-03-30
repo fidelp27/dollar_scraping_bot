@@ -1,0 +1,6 @@
+Dolar: DLAR CDO C/LIQ
+Precio compra: 382,13
+Precio venta: 395,48
+Variación: 1,31%
+Fecha: 30.03.2023
+Hora: 07:50

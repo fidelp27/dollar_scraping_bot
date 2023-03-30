@@ -1,0 +1,6 @@
+Dolar: DLAR BLUE
+Precio compra: 389,00
+Precio venta: 393,00
+Variación: -1,01%
+Fecha: 30.03.2023
+Hora: 07:50

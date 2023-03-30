@@ -1,0 +1,4 @@
+links = //h2[@data-h]/a/@href
+titulo = //div[contains(@class, "OpeningPostNormal")]/div/div/h2/span/text()
+resumen = //div[contains(@class, "lead")]/p/text()
+body = //div[@class="html-content"]/p//text()
