@@ -95,6 +95,7 @@ def run():
         job, telegram_token, telegram_chat_id)
 
 
+# Se ejecuta la función run() si el archivo es ejecutado directamente
 if __name__ == '__main__':
     run()
     # bucle infinito para ejecutar la tarea programada
