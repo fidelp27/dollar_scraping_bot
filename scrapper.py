@@ -12,17 +12,6 @@ import time
 load_dotenv()
 
 
-HOME_URL = 'https://www.cronista.com/MercadosOnline/dolar.html'
-XPATH_LINKS = '//td[@class="name"]/a/@href'
-XPATH_DOLLAR_TYPE = '//td[@class="name"]/a/text()'
-
-XPATH_PRICE_SELL = '//td[@class="sell"]/a/div/div[@class="sell-value"]/text()'
-XPATH_PRICE_BUY = '//td[@class="buy"]/a/div/div[@class="buy-value"]/text()'
-
-XPATH_VARIATION = '//td[contains(@class,"percentage")]/a/span/text()'
-XPATH_DATE = '//td[contains(@class,"date")]/a/text()'
-
-
 async def send_telegram_message(token, chat_id, message):
     bot = telegram.Bot(token=token)
     try:
@@ -33,13 +22,13 @@ async def send_telegram_message(token, chat_id, message):
 
 async def parse_home(token, chat_id):
     try:
-        response = requests.get(HOME_URL)
+        response = requests.get(os.getenv('HOME_URL'))
         if response.status_code == 200:
             home = response.content.decode('utf-8', errors='ignore')
             # Convierte en un objeto de lxml
             parsed = html.fromstring(home)
             # Obtiene los links de las noticias
-            dollar_types = parsed.xpath(XPATH_LINKS)
+            dollar_types = parsed.xpath(os.getenv('XPATH_LINKS'))
             # Fecha de hoy para crear carpeta
             today = datetime.date.today().strftime('%d-%m-%Y')
             if not os.path.isdir(today):
@@ -47,11 +36,13 @@ async def parse_home(token, chat_id):
 
             for i in range(len(dollar_types)):
                 try:
-                    title = parsed.xpath(XPATH_DOLLAR_TYPE)[i]
-                    precio_compra = parsed.xpath(XPATH_PRICE_BUY)[i]
-                    precio_venta = parsed.xpath(XPATH_PRICE_SELL)[i]
-                    variacion = parsed.xpath(XPATH_VARIATION)[i]
-                    fecha = parsed.xpath(XPATH_DATE)[i]
+                    title = parsed.xpath(os.getenv('XPATH_DOLLAR_TYPE'))[i]
+                    precio_compra = parsed.xpath(
+                        os.getenv('XPATH_PRICE_BUY'))[i]
+                    precio_venta = parsed.xpath(
+                        os.getenv('XPATH_PRICE_SELL'))[i]
+                    variacion = parsed.xpath(os.getenv('XPATH_VARIATION'))[i]
+                    fecha = parsed.xpath(os.getenv('XPATH_DATE'))[i]
 
                     # Construir el nombre de archivo único
                     filename = f'{today}/{title.strip().replace("/","")}.txt'
