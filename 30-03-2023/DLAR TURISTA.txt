@@ -1,0 +1,6 @@
+Dolar: DLAR TURISTA
+Precio compra: 208,19
+Precio venta: 431,00
+Variación: 0,23%
+Fecha: 30.03.2023
+Hora: 23:01
